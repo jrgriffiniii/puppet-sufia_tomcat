@@ -14,6 +14,8 @@ fixtures:
     firewall: 'puppetlabs/firewall'
 
     rvm: 'maestrodev/rvm'
+    passenger: 'puppetlabs/passenger'
+    apache: 'puppetlabs/apache'
 
   repositories:
 

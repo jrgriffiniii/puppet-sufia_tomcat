@@ -33,9 +33,9 @@ describe 'sufia_tomcat::install' do
 
       should contain_rvm_gem('rails')
         .with_name('rails')
-        .with_ruby_version('ruby-2.0.0-p0')
+        .with_ruby_version('ruby-2.1.5')
         .with_ensure('4.1.8')
-        .that_requires("Rvm_system_ruby[ruby-2.0.0-p0]")
+        .that_requires("Rvm_system_ruby[ruby-2.1.5]")
     end
 
   end

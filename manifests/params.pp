@@ -4,7 +4,6 @@
 #
 class sufia_tomcat::params {
 
-  $download_url = 'http://downloads.sourceforge.net/fedora-commons/sufia_tomcat-2.7.zip'
   $version = '2.7'
 
   $app_name = 'sufia'
@@ -27,4 +26,6 @@ class sufia_tomcat::params {
   $solr_version = '4.2.0'
   $install_dir_path = '/var/lib/solr'
   $solr_index_name = 'fedora'
+
+  $http_service = undef
 }
