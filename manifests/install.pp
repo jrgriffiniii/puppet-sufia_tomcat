@@ -5,7 +5,8 @@
 #
 class sufia_tomcat::install inherits sufia_tomcat {
 
-  require '::java', 'epel', '::fedora_commons', 'rvm'
+#  require '::java', 'epel', '::fedora_commons', 'rvm'
+  require 'rvm'
 
   # Install Ruby
   rvm_system_ruby { 'ruby-2.1.5':
