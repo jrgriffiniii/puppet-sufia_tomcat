@@ -98,7 +98,7 @@ class sufia_tomcat::install inherits sufia_tomcat {
           # Install and configure passenger
           class { 'passenger':
 
-            notify => Class['::apache']
+
           }
           
           # Set the DocumentRoot directive for the default VirtualHost
@@ -116,6 +116,7 @@ class sufia_tomcat::install inherits sufia_tomcat {
               
               path        => '/var/www/sufia',
             },
+            require => Class['passenger']
           }
         }
       }
