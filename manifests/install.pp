@@ -15,6 +15,12 @@ class sufia_tomcat::install inherits sufia_tomcat {
     default_use => true
   }
 
+  # Install the Ruby development headers (for the local compilation of Rails)
+  package { 'ruby-devel':
+
+    ensure => 'installed'
+  }
+
   # Install the necessary Gems
 
   # Install bundler
@@ -25,7 +31,7 @@ class sufia_tomcat::install inherits sufia_tomcat {
     name         => 'rails',
     ruby_version => 'ruby-2.1.5',
     ensure       => '4.1.8',
-    require      => Rvm_system_ruby['ruby-2.1.5']
+    require      => [ Rvm_system_ruby['ruby-2.1.5'], Package['ruby-devel'] ]
   }
 
   # Create the Rails application
