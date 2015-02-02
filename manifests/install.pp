@@ -103,10 +103,7 @@ class sufia_tomcat::install inherits sufia_tomcat {
           # Configure Apache HTTP Server
 
           # Install and configure passenger
-          class { 'passenger':
-
-
-          }
+          class { 'passenger': }
           
           # Set the DocumentRoot directive for the default VirtualHost
 #          class { '::apache':
