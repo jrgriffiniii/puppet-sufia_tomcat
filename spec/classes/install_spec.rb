@@ -38,6 +38,12 @@ describe 'sufia_tomcat::install' do
 
     it do
 
+      should contain_package('ruby-devel')
+        .with_ensure('installed')
+    end
+
+    it do
+
       should contain_rvm_gem('rails')
         .with_name('rails')
         .with_ruby_version('ruby-2.1.5')
@@ -45,7 +51,11 @@ describe 'sufia_tomcat::install' do
         .that_requires("Rvm_system_ruby[ruby-2.1.5]")
     end
 
-    
+    it do
+
+      should contain_class('passenger')
+        .that_requires('Package[ruby-devel]')
+    end
 
   end
 end
