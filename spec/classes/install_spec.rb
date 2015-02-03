@@ -53,6 +53,14 @@ describe 'sufia_tomcat::install' do
 
     it do
 
+      should contain_exec('rails_create_app')
+        .with_tries(6)
+        .with_try_sleep(3)
+        .that_requires("Rvm_gem[rails]")
+    end
+
+    it do
+
       should contain_class('passenger')
         .that_requires('Package[ruby-devel]')
     end

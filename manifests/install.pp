@@ -38,7 +38,9 @@ class sufia_tomcat::install inherits sufia_tomcat {
   exec { 'rails_create_app':
 
     command => '/usr/bin/env rails new /var/www/sufia',
-    require => Rvm_gem['rails']
+    require => Rvm_gem['rails'],
+    tries => 6,
+    try_sleep => 3
   }
 
   # Load the Gemfile
