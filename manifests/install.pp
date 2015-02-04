@@ -38,7 +38,8 @@ class sufia_tomcat::install inherits sufia_tomcat {
   exec { 'rails_create_app':
 
 #    command => '/usr/bin/env rails new /var/www/sufia',
-    command => '/usr/local/rvm/gems/ruby-2.1.5/bin/rails new /var/www/sufia',
+#    command => '/usr/local/rvm/gems/ruby-2.1.5/bin/rails new /var/www/sufia',
+    command => '/usr/bin/env sudo -i rails new /var/www/sufia',
     require => Rvm_gem['rails'],
     tries => 6,
     try_sleep => 3
@@ -55,7 +56,8 @@ class sufia_tomcat::install inherits sufia_tomcat {
   exec { 'rails_bundle_install':
 
     # command => '/usr/bin/env bundle install',
-    command => '/usr/local/rvm/gems/ruby-2.1.5@global/bin/bundle install',
+    # command => '/usr/local/rvm/gems/ruby-2.1.5@global/bin/bundle install',
+    command => '/usr/bin/env sudo -i bundle install',
     cwd => '/var/www/sufia',
     require => File['/var/www/sufia/Gemfile']
   }
@@ -64,8 +66,9 @@ class sufia_tomcat::install inherits sufia_tomcat {
   exec { 'rails_generate_sufia':
 
     # command => '/usr/bin/env rails generate sufia:install -f',
-    command => '/usr/local/rvm/gems/ruby-2.1.5/bin/rails generate sufia:install -f',
-        cwd => '/var/www/sufia',
+    # command => '/usr/local/rvm/gems/ruby-2.1.5/bin/rails generate sufia:install -f',
+    command => '/usr/bin/env sudo -i rails generate sufia:install -f',
+    cwd => '/var/www/sufia',
     require => Exec['rails_bundle_install']
   }
 
@@ -73,7 +76,8 @@ class sufia_tomcat::install inherits sufia_tomcat {
   exec { 'rails_rake_db_migrate':
 
     # command => '/usr/bin/env rake db:migrate',
-    command => '/usr/local/rvm/rubies/ruby-2.1.5/bin/rake db:migrate',
+    # command => '/usr/local/rvm/rubies/ruby-2.1.5/bin/rake db:migrate',
+    command => '/usr/bin/env sudo -i rake db:migrate',
     cwd => '/var/www/sufia',
     require => Exec['rails_generate_sufia']
   }
