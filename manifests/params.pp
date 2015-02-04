@@ -8,6 +8,9 @@ class sufia_tomcat::params {
 
   $app_name = 'sufia'
 
+  $ruby_version = 'ruby-2.1.5'
+  $rails_version = '4.1.8'
+
   $fedora_user_name = 'fgsAdmin'
   $fedora_user_pass = 'secret'
   $fedora_admin_user_name = 'fedoraAdmin'

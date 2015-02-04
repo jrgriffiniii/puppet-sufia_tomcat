@@ -9,7 +9,7 @@ class sufia_tomcat::install inherits sufia_tomcat {
   require 'rvm'
 
   # Install Ruby
-  rvm_system_ruby { 'ruby-2.1.5':
+  rvm_system_ruby { $sufia_tomcat::ruby_version:
       
     ensure      => 'present',
     default_use => true
@@ -29,15 +29,16 @@ class sufia_tomcat::install inherits sufia_tomcat {
   rvm_gem { 'rails':
     
     name         => 'rails',
-    ruby_version => 'ruby-2.1.5',
+    ruby_version => $sufia_tomcat::ruby_version,
     ensure       => '4.1.8',
-    require      => [ Rvm_system_ruby['ruby-2.1.5'], Package['ruby-devel'] ]
+    require      => [ Rvm_system_ruby[$sufia_tomcat::ruby_version], Package['ruby-devel'] ]
   }
 
   # Create the Rails application
   exec { 'rails_create_app':
 
-    command => '/usr/bin/env rails new /var/www/sufia',
+#    command => '/usr/bin/env rails new /var/www/sufia',
+    command => '/usr/local/rvm/gems/ruby-2.1.5/bin/rails new /var/www/sufia',
     require => Rvm_gem['rails'],
     tries => 6,
     try_sleep => 3
