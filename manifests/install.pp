@@ -16,7 +16,7 @@ class sufia_tomcat::install inherits sufia_tomcat {
   }
 
   # Install the Ruby development headers (for the local compilation of Rails)
-  package { 'ruby-devel':
+  package { ['ruby-devel', 'git']:
 
     ensure => 'installed'
   }
@@ -52,14 +52,16 @@ class sufia_tomcat::install inherits sufia_tomcat {
     require => Exec['rails_create_app']
   }
 
+  
+
   # Install the Gems
   exec { 'rails_bundle_install':
 
     # command => '/usr/bin/env bundle install',
     # command => '/usr/local/rvm/gems/ruby-2.1.5@global/bin/bundle install',
-    command => '/usr/bin/env sudo -i bundle install',
+    command => '/usr/bin/env sudo -i su -c "cd /var/www/sufia && bundle update && bundler"',
     cwd => '/var/www/sufia',
-    require => File['/var/www/sufia/Gemfile']
+    require => Package['git'], File['/var/www/sufia/Gemfile']
   }
 
   # Generate the Sufia instance
