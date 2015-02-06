@@ -81,7 +81,7 @@ class sufia_tomcat::install inherits sufia_tomcat {
     # command => '/usr/bin/env rake db:migrate',
     # command => '/usr/local/rvm/rubies/ruby-2.1.5/bin/rake db:migrate',
     # command => '/usr/bin/env sudo -i rake db:migrate',
-    command => 'sudo -i su -c "cd /var/www/sufia && rake db:migrate"',
+    command => 'sudo su -c "cd /var/www/sufia && rake db:migrate"',
     cwd => '/var/www/sufia',
     require => [ Package['nodejs'], Exec['rails_generate_sufia'] ]
   }
