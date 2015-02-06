@@ -61,7 +61,8 @@ class sufia_tomcat::install inherits sufia_tomcat {
     # command => '/usr/local/rvm/gems/ruby-2.1.5@global/bin/bundle install',
     command => '/usr/bin/env sudo -i su -c "cd /var/www/sufia && bundle update && bundler install"',
     cwd => '/var/www/sufia',
-    require => [ Package['git'], File['/var/www/sufia/Gemfile'] ]
+    require => [ Package['git'], File['/var/www/sufia/Gemfile'] ],
+    timeout => 0
   }
 
   # Generate the Sufia instance
