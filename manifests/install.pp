@@ -6,7 +6,7 @@
 class sufia_tomcat::install inherits sufia_tomcat {
 
 #  require '::java', 'epel', '::fedora_commons', 'rvm'
-  require 'rvm'
+  require 'epel', 'rvm'
 
   # Install Ruby
   rvm_system_ruby { $sufia_tomcat::ruby_version:
@@ -16,7 +16,7 @@ class sufia_tomcat::install inherits sufia_tomcat {
   }
 
   # Install the Ruby development headers (for the local compilation of Rails)
-  package { ['ruby-devel', 'git']:
+  package { ['ruby-devel', 'git', 'nodejs' ]:
 
     ensure => 'installed'
   }
@@ -80,9 +80,10 @@ class sufia_tomcat::install inherits sufia_tomcat {
 
     # command => '/usr/bin/env rake db:migrate',
     # command => '/usr/local/rvm/rubies/ruby-2.1.5/bin/rake db:migrate',
-    command => '/usr/bin/env sudo -i rake db:migrate',
+    # command => '/usr/bin/env sudo -i rake db:migrate',
+    command => 'sudo -i su -c "cd /var/www/sufia && rake db:migrate"',
     cwd => '/var/www/sufia',
-    require => Exec['rails_generate_sufia']
+    require => [ Package['nodejs'], Exec['rails_generate_sufia'] ]
   }
 
   # Configure the application for Fedora Commons
